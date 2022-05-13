@@ -1,18 +1,34 @@
-import { Heading } from 'components';
+import { Fragment } from 'react';
+import { Heading, Container, GridContainer } from 'components';
 import { useQuestions } from 'hooks';
+import { Question } from 'types';
 
 export function Questions() {
-	const { questions } = useQuestions();
+	const { status, questions } = useQuestions();
 
 	return (
-		<div>
-			<Heading size="lg" tag="h1">
-				Questions Poll
-			</Heading>
+		<Fragment>
+			<Container>
+				<Heading size="lg" tag="h1">
+					Questions Poll
+				</Heading>
+			</Container>
 
-			{questions.map((question) => (
-				<p>{question.question}</p>
+			{status === 'fetching' ? (
+				<p>Loading...</p>
+			) : (
+				<QuestionsList questions={questions} />
+			)}
+		</Fragment>
+	);
+}
+
+function QuestionsList({ questions }: { questions: Question[] }) {
+	return (
+		<GridContainer>
+			{questions.map((question, idx) => (
+				<p key={idx}>{question.question}</p>
 			))}
-		</div>
+		</GridContainer>
 	);
 }

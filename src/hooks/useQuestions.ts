@@ -7,8 +7,8 @@ import { formatQuestions } from 'utils';
 
 export function useQuestions() {
 	const [status, fetch] = useFetch();
-	const { questions } = useSelector((state) => state.questions);
 	const dispatch = useDispatch();
+	const { questions } = useSelector((state) => state.questions);
 
 	useEffect(() => {
 		fetch(
