@@ -1,1 +1,2 @@
-export { StyledHeading } from './Heading';
+export { StyledHeading as Heading } from './Heading';
+export { Spinner } from './Spinner';

@@ -13,4 +13,5 @@ function Heading({ tag: Element, children, className }: HeadingProps) {
 
 export const StyledHeading = styled(Heading)`
 	font-size: ${({ size, theme }) => theme.fonts[size!]};
+	color: ${({ theme }) => theme.colors.white};
 `;
