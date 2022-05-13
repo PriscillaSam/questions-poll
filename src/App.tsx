@@ -1,11 +1,18 @@
-import './App.css'
+import { StyledHeading } from 'components';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles, theme } from 'styles';
 
 function App() {
 	return (
-		<div className="App">
-			<header className="App-header">Questions</header>
-		</div>
-	)
+		<ThemeProvider theme={theme}>
+			<GlobalStyles />
+			<div className="App">
+				<StyledHeading size="lg" tag="h1">
+					Questions
+				</StyledHeading>
+			</div>
+		</ThemeProvider>
+	);
 }
 
-export default App
+export default App;

@@ -1,0 +1,1 @@
+export { StyledHeading } from './Heading';
