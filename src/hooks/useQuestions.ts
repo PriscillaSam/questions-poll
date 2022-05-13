@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'store';
 import { actions } from 'store/questions';
 import { useFetch } from 'hooks';
 import { Question } from 'types';
+import { formatQuestions } from 'utils';
 
 export function useQuestions() {
 	const [status, fetch] = useFetch();
@@ -14,7 +15,10 @@ export function useQuestions() {
 			{
 				url: 'questions',
 			},
-			(questions: Question[]) => dispatch(actions.setQuestions(questions))
+			(response: Question[]) => {
+				const questionsWithVotes = formatQuestions(response);
+				dispatch(actions.setQuestions(questionsWithVotes));
+			}
 		);
 	}, [fetch, dispatch]);
 

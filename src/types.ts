@@ -11,4 +11,5 @@ export type Question = {
 	published_at: string;
 	url: string;
 	choices: Choice[];
+	votes?: number;
 };
