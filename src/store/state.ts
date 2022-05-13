@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import questionsReducer from './questions';
 
-const store = configureStore({
+export const store = configureStore({
 	reducer: {
 		questions: questionsReducer,
 	},
