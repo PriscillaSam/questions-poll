@@ -7,6 +7,7 @@ export type Choice = {
 };
 
 export type Question = {
+	id: string;
 	question: string;
 	published_at: string;
 	url: string;

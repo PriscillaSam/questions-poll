@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Heading, Container, GridContainer } from 'components';
 import { useQuestions } from 'hooks';
 import { Question } from 'types';
+import QuestionCard from './Card';
 
 export function Questions() {
 	const { status, questions } = useQuestions();
@@ -27,7 +28,7 @@ function QuestionsList({ questions }: { questions: Question[] }) {
 	return (
 		<GridContainer>
 			{questions.map((question, idx) => (
-				<p key={idx}>{question.question}</p>
+				<QuestionCard key={idx} question={question} />
 			))}
 		</GridContainer>
 	);

@@ -8,7 +8,8 @@ declare module 'styled-components' {
 			secondary: string;
 			lightGreen: string;
 			white: string;
-			
+			grey: string;
+			darkGrey: string;
 		};
 		fonts: {
 			xs: string;
@@ -16,6 +17,11 @@ declare module 'styled-components' {
 			md: string;
 			lg: string;
 			xl: string;
+		};
+		spacing: {
+			sm: string;
+			md: string;
+			lg: string;
 		};
 	}
 }
