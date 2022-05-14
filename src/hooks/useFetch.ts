@@ -1,4 +1,4 @@
-import { useCallback, useReducer } from 'react';
+import { useCallback, useReducer, useRef } from 'react';
 import { RequestStatus } from 'types';
 
 const API_Url = 'https://polls.apiblueprint.org';
@@ -22,6 +22,7 @@ type State<T> = {
 };
 
 export function useFetch<T>() {
+  const abortRef = useRef<AbortController | null>(null);
   const [state, setState] = useReducer(
     (state: State<T>, payload: Partial<State<T>>) => ({
       ...state,
@@ -32,12 +33,16 @@ export function useFetch<T>() {
 
   const api = useCallback(
     async ({ url, body, method = 'GET' }: FetchParams) => {
+      if (abortRef.current) abortRef.current.abort(); // abort previous request
+      abortRef.current = new AbortController();
+
       setState({ status: 'fetching' });
       try {
         let options = {
           url,
           method,
-          ...(body ? { body: JSON.stringify(body) } : {}),
+          signal: abortRef.current.signal,
+          ...(body ? { body } : {}),
         };
 
         const response = await fetch(`${API_Url}/${url}`, options);
@@ -49,7 +54,10 @@ export function useFetch<T>() {
         const jsonData = await response.json();
         setState({ data: jsonData, status: 'success' });
       } catch (error) {
-        setState({ status: 'error' });
+        if (!abortRef.current.signal.aborted) {
+          // only set error if request was not aborted
+          setState({ status: 'error' });
+        }
       }
     },
     []
