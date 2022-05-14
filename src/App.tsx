@@ -7,6 +7,7 @@ import { GlobalStyles, theme } from 'styles';
 import store from 'store';
 
 const Questions = lazy(() => import('pages/questions'));
+const QuestionDetails = lazy(() => import('pages/question-details'));
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Router>
             <Routes>
               <Route path="/" element={<Questions />} />
+              <Route path="/questions" element={<Questions />} />
+              <Route path="/questions/:id" element={<QuestionDetails />} />
             </Routes>
           </Router>
         </Suspense>

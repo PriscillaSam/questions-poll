@@ -8,6 +8,7 @@ export const theme: DefaultTheme = {
     lightGreen: '#3CC15A',
     white: '#FFFFFF',
     grey: '#868686',
+    lightGrey: '#E5E5E5',
     darkGrey: '#21262D',
   },
   fonts: {
@@ -23,7 +24,7 @@ export const theme: DefaultTheme = {
     lg: '5rem',
   },
   breakpoints: {
-    mobile: '320px',
+    mobile: '480px',
     tablet: '768px',
     desktop: '1024px',
   },

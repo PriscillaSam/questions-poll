@@ -55,8 +55,6 @@ export function useFetch<T>() {
         setState({ data: jsonData, status: 'success' });
       } catch (error: any) {
         if (error?.name !== 'AbortError') {
-          console.log(error);
-
           // only set error if request was not aborted
           setState({ status: 'error' });
         }
