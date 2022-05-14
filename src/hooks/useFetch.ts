@@ -53,8 +53,10 @@ export function useFetch<T>() {
 
         const jsonData = await response.json();
         setState({ data: jsonData, status: 'success' });
-      } catch (error) {
-        if (!abortRef.current.signal.aborted) {
+      } catch (error: any) {
+        if (error?.name !== 'AbortError') {
+          console.log(error);
+
           // only set error if request was not aborted
           setState({ status: 'error' });
         }
