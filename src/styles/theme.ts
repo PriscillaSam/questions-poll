@@ -22,4 +22,9 @@ export const theme: DefaultTheme = {
     md: '2rem',
     lg: '5rem',
   },
+  breakpoints: {
+    mobile: '320px',
+    tablet: '768px',
+    desktop: '1024px',
+  },
 };
