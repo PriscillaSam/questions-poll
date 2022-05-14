@@ -1,49 +1,59 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useReducer } from 'react';
 import { RequestStatus } from 'types';
 
 const API_Url = 'https://polls.apiblueprint.org';
 
 type FetchParams = {
-	url: string;
-	method?: string;
-	body?: FormData | URLSearchParams | string | Blob | ArrayBuffer;
+  url: string;
+  method?: string;
+  body?: string;
 };
 
-export function useFetch() {
-	const [status, setStatus] = useState<RequestStatus>('idle');
+const initialState = {
+  status: 'idle' as RequestStatus,
+  data: null,
+  error: null,
+};
 
-	const api = useCallback(
-		async (
-			{ url, body, method = 'GET' }: FetchParams,
-			callback?: (response: any) => void
-		) => {
-			setStatus('fetching');
-			try {
-				let options = {
-					url,
-					method,
-					...(body ? { body: JSON.stringify(body) } : {}),
-				};
+type State<T> = {
+  status: RequestStatus;
+  data: T | null;
+  error: string | null;
+};
 
-				const response = await fetch(`${API_Url}/${url}`, options);
+export function useFetch<T>() {
+  const [state, setState] = useReducer(
+    (state: State<T>, payload: Partial<State<T>>) => ({
+      ...state,
+      ...payload,
+    }),
+    initialState
+  );
 
-				if (!response.ok) {
-					throw new Error('Oooops!!! Something went wrong, please try again.');
-				}
+  const api = useCallback(
+    async ({ url, body, method = 'GET' }: FetchParams) => {
+      setState({ status: 'fetching' });
+      try {
+        let options = {
+          url,
+          method,
+          ...(body ? { body: JSON.stringify(body) } : {}),
+        };
 
-				const jsonData = await response.json();
-				callback && callback(jsonData);
-			} catch (error) {
-				// TODO: handle error
-				console.error(error);
-				setStatus('error');
-			} finally {
-				// TODO: set state
-				setStatus('idle');
-			}
-		},
-		[]
-	);
+        const response = await fetch(`${API_Url}/${url}`, options);
 
-	return [status, api] as const;
+        if (!response.ok) {
+          throw new Error('Oooops!!! Something went wrong, please try again.');
+        }
+
+        const jsonData = await response.json();
+        setState({ data: jsonData, status: 'success' });
+      } catch (error) {
+        setState({ status: 'error' });
+      }
+    },
+    []
+  );
+
+  return { ...state, api };
 }

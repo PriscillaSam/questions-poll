@@ -6,21 +6,22 @@ import { Question } from 'types';
 import { formatQuestions } from 'utils';
 
 export function useQuestions() {
-	const [status, fetch] = useFetch();
-	const dispatch = useDispatch();
-	const { questions } = useSelector((state) => state.questions);
+  const dispatch = useDispatch();
+  const { api: fetch, data, status } = useFetch<Question[]>();
+  const { questions } = useSelector((state) => state.questions);
 
-	useEffect(() => {
-		fetch(
-			{
-				url: 'questions',
-			},
-			(response: Question[]) => {
-				const questionsWithVotes = formatQuestions(response);
-				dispatch(actions.setQuestions(questionsWithVotes));
-			}
-		);
-	}, [fetch, dispatch]);
+  useEffect(() => {
+    fetch({
+      url: 'questions',
+    });
+  }, [fetch, dispatch]);
 
-	return { status, questions };
+  useEffect(() => {
+    if (data) {
+      const questionsWithVotes = formatQuestions(data);
+      dispatch(actions.setQuestions(questionsWithVotes));
+    }
+  }, [data, dispatch]);
+
+  return { status, questions };
 }
