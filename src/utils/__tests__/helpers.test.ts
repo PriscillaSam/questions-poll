@@ -1,8 +1,7 @@
-import { formatQuestions, questions } from 'utils';
+import { Question } from 'types';
+import { formatQuestion, questions } from 'utils';
 
 test('should return the questions with the correct number of votes', () => {
-  const questionsWithVotes = formatQuestions(questions);
-
-  expect(questionsWithVotes[0].votes).toBe(3840);
-  expect(questionsWithVotes[2].votes).toBe(7);
+  expect(formatQuestion(questions[0] as Question).votes).toBe(3840);
+  expect(formatQuestion(questions[2] as Question).votes).toBe(7);
 });

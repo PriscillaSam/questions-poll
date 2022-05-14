@@ -6,17 +6,12 @@ import { nanoid } from '@reduxjs/toolkit';
  * and returns the question with the total votes.
  */
 
-export function formatQuestions(questions: Question[]) {
-  return questions.map((question) => {
-    const votes = question.choices.reduce(
-      (acc, choice) => acc + choice.votes,
-      0
-    );
+export function formatQuestion(question: Question) {
+  const votes = question.choices.reduce((acc, choice) => acc + choice.votes, 0);
 
-    return {
-      ...question,
-      id: nanoid(),
-      votes,
-    };
-  });
+  return {
+    ...question,
+    id: nanoid(),
+    votes,
+  };
 }

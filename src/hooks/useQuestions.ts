@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'store';
 import { actions } from 'store/questions';
 import { useFetch } from 'hooks';
 import { Question } from 'types';
-import { formatQuestions } from 'utils';
+import { formatQuestion } from 'utils';
 
 export function useQuestions() {
   const dispatch = useDispatch();
@@ -18,7 +18,9 @@ export function useQuestions() {
 
   useEffect(() => {
     if (data) {
-      const questionsWithVotes = formatQuestions(data);
+      const questionsWithVotes = data.map((question) =>
+        formatQuestion(question)
+      );
       dispatch(actions.setQuestions(questionsWithVotes));
     }
   }, [data, dispatch]);

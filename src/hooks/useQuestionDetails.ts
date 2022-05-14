@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'store';
 import { actions } from 'store/question-details';
 import { useFetch } from 'hooks';
 import { Question } from 'types';
+import { formatQuestion } from 'utils';
 
 export function useQuestionDetails() {
   const { id } = useParams();
@@ -19,7 +20,7 @@ export function useQuestionDetails() {
 
   useEffect(() => {
     if (data) {
-      dispatch(actions.setQuestion(data));
+      dispatch(actions.setQuestion(formatQuestion(data)));
     }
   }, [data, dispatch]);
 
