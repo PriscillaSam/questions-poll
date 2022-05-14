@@ -8,22 +8,22 @@ import questionsReducer from 'store/questions';
 import { theme } from 'styles';
 
 function Providers({ children }: { children: ReactNode }) {
-	return (
-		<ThemeProvider theme={theme}>
-			<Provider
-				store={configureStore({
-					reducer: { questions: questionsReducer },
-				})}
-			>
-				{children}
-			</Provider>
-		</ThemeProvider>
-	);
+  return (
+    <ThemeProvider theme={theme}>
+      <Provider
+        store={configureStore({
+          reducer: { questions: questionsReducer },
+        })}
+      >
+        {children}
+      </Provider>
+    </ThemeProvider>
+  );
 }
 
 const customRender = (
-	ui: ReactElement,
-	options?: Omit<RenderOptions, 'wrapper'>
+  ui: ReactElement,
+  options?: Omit<RenderOptions, 'wrapper'>
 ) => render(ui, { wrapper: Providers, ...options });
 
 export * from '@testing-library/react';

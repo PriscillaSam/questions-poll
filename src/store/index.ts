@@ -1,7 +1,7 @@
 import {
-	useDispatch as useUntypedDispatch,
-	useSelector as useUntypedSelector,
-	TypedUseSelectorHook,
+  useDispatch as useUntypedDispatch,
+  useSelector as useUntypedSelector,
+  TypedUseSelectorHook,
 } from 'react-redux';
 
 import { Dispatch, State, store } from './state';

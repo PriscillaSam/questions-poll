@@ -9,21 +9,21 @@ import store from 'store';
 const Questions = lazy(() => import('pages/questions'));
 
 function App() {
-	return (
-		<Provider store={store}>
-			<ThemeProvider theme={theme}>
-				<Suspense fallback={<Spinner />}>
-					<GlobalStyles />
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Suspense fallback={<Spinner />}>
+          <GlobalStyles />
 
-					<Router>
-						<Routes>
-							<Route path="/" element={<Questions />} />
-						</Routes>
-					</Router>
-				</Suspense>
-			</ThemeProvider>
-		</Provider>
-	);
+          <Router>
+            <Routes>
+              <Route path="/" element={<Questions />} />
+            </Routes>
+          </Router>
+        </Suspense>
+      </ThemeProvider>
+    </Provider>
+  );
 }
 
 export default App;

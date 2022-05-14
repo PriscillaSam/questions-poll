@@ -2,21 +2,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Question } from 'types';
 
 type QuestionsState = {
-	questions: Question[];
+  questions: Question[];
 };
 
 const initialState: QuestionsState = {
-	questions: [],
+  questions: [],
 };
 
 const { actions, reducer } = createSlice({
-	name: 'questions',
-	initialState,
-	reducers: {
-		setQuestions: (state, action: PayloadAction<Question[]>) => {
-			state.questions = action.payload;
-		},
-	},
+  name: 'questions',
+  initialState,
+  reducers: {
+    setQuestions: (state, action: PayloadAction<Question[]>) => {
+      state.questions = action.payload;
+    },
+  },
 });
 
 export { actions };

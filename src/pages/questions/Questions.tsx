@@ -5,31 +5,31 @@ import { Question } from 'types';
 import QuestionCard from './Card';
 
 export function Questions() {
-	const { status, questions } = useQuestions();
+  const { status, questions } = useQuestions();
 
-	return (
-		<Fragment>
-			<Container>
-				<Heading size="lg" tag="h1">
-					Questions Poll
-				</Heading>
-			</Container>
+  return (
+    <Fragment>
+      <Container>
+        <Heading size="lg" tag="h1">
+          Questions Poll
+        </Heading>
+      </Container>
 
-			{status === 'fetching' ? (
-				<p>Loading...</p>
-			) : (
-				<QuestionsList questions={questions} />
-			)}
-		</Fragment>
-	);
+      {status === 'fetching' ? (
+        <p>Loading...</p>
+      ) : (
+        <QuestionsList questions={questions} />
+      )}
+    </Fragment>
+  );
 }
 
 function QuestionsList({ questions }: { questions: Question[] }) {
-	return (
-		<GridContainer>
-			{questions.map((question, idx) => (
-				<QuestionCard key={idx} question={question} />
-			))}
-		</GridContainer>
-	);
+  return (
+    <GridContainer>
+      {questions.map((question, idx) => (
+        <QuestionCard key={idx} question={question} />
+      ))}
+    </GridContainer>
+  );
 }
