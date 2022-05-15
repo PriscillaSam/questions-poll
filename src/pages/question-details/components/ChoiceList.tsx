@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { ChangeEvent } from 'react';
 import styled, { css } from 'styled-components';
 import { Question } from 'types';
 import ChoiceCard from './ChoiceCard';
 
 interface ChoiceListProps {
   question: Question;
+  selectedChoice: string;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const List = styled.ul(
@@ -12,15 +14,17 @@ const List = styled.ul(
     padding: 0;
     margin-top: ${spacing.sm};
 
-    @media screen and (min-width: ${breakpoints.mobile}) {
+    @media screen and (min-width: ${breakpoints.tablet}) {
       margin: 0 ${spacing.lg};
     }
   `
 );
 
-export function ChoiceList({ question: { choices, id } }: ChoiceListProps) {
-  const [selectedChoice, setSelectedChoice] = useState('');
-
+export function ChoiceList({
+  selectedChoice,
+  handleChange,
+  question: { choices, id },
+}: ChoiceListProps) {
   return (
     <List>
       {choices.map((choice) => (
@@ -29,7 +33,7 @@ export function ChoiceList({ question: { choices, id } }: ChoiceListProps) {
           choice={choice}
           question={id}
           selected={selectedChoice === choice.url}
-          handleChange={(event) => setSelectedChoice(event.target.value)}
+          handleChange={handleChange}
         />
       ))}
     </List>

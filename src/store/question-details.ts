@@ -16,6 +16,16 @@ const { actions, reducer } = createSlice({
     setQuestion: (state, action: PayloadAction<Question>) => {
       state.question = action.payload;
     },
+
+    voteChoice: (state, action: PayloadAction<string>) => {
+      state.question.choices.forEach((choice) => {
+        if (choice.url === action.payload) {
+          choice.votes += 1;
+        }
+      });
+
+      state.question.votes! += 1;
+    },
   },
 });
 
