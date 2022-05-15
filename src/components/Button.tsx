@@ -6,12 +6,13 @@ export const Button = styled.button.attrs({ type: 'button' })(
     border: none;
     padding: ${spacing.sm};
     color: ${colors.white};
-    width: 100px;
+    min-width: 100px;
     font-weight: 500;
     cursor: pointer;
 
     &:disabled {
       opacity: 0.7;
+      cursor: not-allowed;
     }
 
     @media screen and (min-width: ${breakpoints.mobile}) {

@@ -19,7 +19,7 @@ export function Questions() {
         <Heading size="lg" tag="h1">
           Questions Poll
         </Heading>
-        <Link to="/questions/new">Create a new question</Link>
+        <Link href="/questions/new">Create a new question</Link>
       </FlexContainer>
 
       {status === 'fetching' ? (

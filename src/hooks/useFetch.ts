@@ -44,6 +44,9 @@ export function useFetch<T>() {
           method,
           signal: abortRef.current.signal,
           ...(body ? { body } : {}),
+          headers: {
+            'Content-Type': 'application/json',
+          },
         };
 
         const response = await fetch(`${API_Url}/${url}`, options);
