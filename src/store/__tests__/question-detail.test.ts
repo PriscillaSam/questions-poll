@@ -1,19 +1,33 @@
 import reducer, { actions } from 'store/question-details';
 import { Question } from 'types';
-import { questions } from 'utils';
+import { formatQuestion, questions } from 'utils';
+
+const question = formatQuestion(questions[0] as Question);
 
 describe('questions reducer', () => {
-  test('should return intial state', () => {
+  it('should return intial state', () => {
     expect(reducer(undefined, {} as any)).toEqual({
       question: {},
     });
   });
 
-  test('should add questions to the state', () => {
-    expect(
-      reducer(undefined, actions.setQuestion(questions[0] as Question))
-    ).toEqual({
-      question: questions[0],
+  it('should add question to the state', () => {
+    expect(reducer(undefined, actions.setQuestion(question))).toEqual({
+      question,
     });
+  });
+
+  it('should update the total votes on a question when a choice is voted', () => {
+    expect(
+      reducer({ question }, actions.voteChoice('/questions/1/choices/4'))
+        .question.votes
+    ).toEqual(question.votes! + 1);
+  });
+
+  it('should update the total votes on a choice', () => {
+    expect(
+      reducer({ question }, actions.voteChoice('/questions/1/choices/4'))
+        .question.choices[3]!.votes
+    ).toEqual(question.choices[3]!.votes + 1);
   });
 });

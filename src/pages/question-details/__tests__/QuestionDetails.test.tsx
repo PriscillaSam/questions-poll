@@ -1,4 +1,4 @@
-import { render, screen, cleanup } from 'test-utils';
+import { render, screen, cleanup, fireEvent } from 'test-utils';
 import { formatQuestion, questions } from 'utils';
 import { useQuestionDetails } from 'hooks';
 import { Question } from 'types';
@@ -19,6 +19,8 @@ describe('<QuestionDetails /> Page', () => {
     mockedHook.mockReturnValue({
       question,
       status: 'fetching',
+      vote: jest.fn(),
+      votingStatus: 'idle',
     });
 
     render(<QuestionDetails />);
@@ -26,7 +28,12 @@ describe('<QuestionDetails /> Page', () => {
   });
 
   it('should render question details', () => {
-    mockedHook.mockReturnValue({ question, status: 'success' });
+    mockedHook.mockReturnValue({
+      question,
+      status: 'success',
+      vote: jest.fn(),
+      votingStatus: 'idle',
+    });
     render(<QuestionDetails />);
     expect(
       screen.getByText('Favourite programming language?')
@@ -40,9 +47,36 @@ describe('<QuestionDetails /> Page', () => {
     mockedHook.mockReturnValue({
       question,
       status: 'error',
+      vote: jest.fn(),
+      votingStatus: 'idle',
     });
 
     render(<QuestionDetails />);
     expect(screen.getByText('Error')).toBeInTheDocument();
+  });
+
+  it('should call the vote function when button is clicked', () => {
+    mockedHook.mockReturnValue({
+      question,
+      status: 'success',
+      vote: jest.fn(),
+      votingStatus: 'idle',
+    });
+
+    render(<QuestionDetails />);
+    const button = screen.getByRole('button');
+
+    // button is disabled when no choice is selected
+    expect(button).toHaveAttribute('disabled');
+
+    fireEvent.click(screen.getByLabelText('Swift'));
+
+    expect(button).not.toHaveAttribute('disabled');
+
+    fireEvent.click(button);
+
+    expect(mockedHook.mock.results[0]?.value.vote).toHaveBeenCalledWith(
+      '/questions/1/choices/1'
+    );
   });
 });

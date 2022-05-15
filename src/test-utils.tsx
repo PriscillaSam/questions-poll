@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
 import questionsReducer from 'store/questions';
+import questionDetails from 'store/question-details';
+
 import { theme } from 'styles';
 
 function Providers({ children }: { children: ReactNode }) {
@@ -12,7 +14,7 @@ function Providers({ children }: { children: ReactNode }) {
     <ThemeProvider theme={theme}>
       <Provider
         store={configureStore({
-          reducer: { questions: questionsReducer },
+          reducer: { questions: questionsReducer, questionDetails },
         })}
       >
         {children}
