@@ -1,5 +1,11 @@
 import { Fragment } from 'react';
-import { Heading, Container, GridContainer, Spinner } from 'components';
+import {
+  Heading,
+  FlexContainer,
+  GridContainer,
+  Spinner,
+  Link,
+} from 'components';
 import { useQuestions } from 'hooks';
 import { Question } from 'types';
 import QuestionCard from './Card';
@@ -9,11 +15,12 @@ export function Questions() {
 
   return (
     <Fragment>
-      <Container>
+      <FlexContainer>
         <Heading size="lg" tag="h1">
           Questions Poll
         </Heading>
-      </Container>
+        <Link to="/questions/new">Create a new question</Link>
+      </FlexContainer>
 
       {status === 'fetching' ? (
         <Spinner />

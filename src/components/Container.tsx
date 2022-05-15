@@ -29,3 +29,12 @@ export const GridContainer = styled(Container)`
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 `;
+
+export const FlexContainer = styled(Container)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (min-width: ${({ theme: { breakpoints } }) => breakpoints.tablet}) {
+  }
+`;

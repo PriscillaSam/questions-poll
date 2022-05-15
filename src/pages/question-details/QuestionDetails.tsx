@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Container, Heading, Spinner, Button } from 'components';
+import { Container, Heading, Spinner, Button, FlexContainer } from 'components';
 import { useQuestionDetails } from 'hooks';
 import { ChoiceList } from './components';
 
@@ -14,11 +14,8 @@ const Wrapper = styled.div`
   }
 `;
 
-const FlexContainer = styled.div(
+const Flex = styled(FlexContainer)(
   ({ theme: { breakpoints, spacing, colors } }) => css`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 0 ${spacing.sm};
     margin-bottom: ${spacing.sm};
 
@@ -60,12 +57,12 @@ function QuestionDetails() {
         handleChange={(event) => setSelectedChoice(event.target.value)}
         question={question}
       />
-      <FlexContainer>
+      <Flex>
         <p>Total votes: {question.votes}</p>
         <Button disabled={!selectedChoice} onClick={() => vote(selectedChoice)}>
           {votingStatus === 'fetching' ? 'Voting...' : 'Vote'}
         </Button>
-      </FlexContainer>
+      </Flex>
     </Wrapper>
   );
 }
