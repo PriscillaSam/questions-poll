@@ -7,23 +7,22 @@ import { formatQuestion } from 'utils';
 
 export function useQuestions() {
   const dispatch = useDispatch();
-  const { api: fetch, data, status } = useFetch<Question[]>();
+  const { api: fetch, status } = useFetch<Question[]>();
   const { questions } = useSelector((state) => state.questions);
 
   useEffect(() => {
-    fetch({
-      url: 'questions',
-    });
+    fetch(
+      {
+        url: 'questions',
+      },
+      (questions) => {
+        const questionsWithVotes = questions.map((question) =>
+          formatQuestion(question)
+        );
+        dispatch(actions.setQuestions(questionsWithVotes));
+      }
+    );
   }, [fetch, dispatch]);
-
-  useEffect(() => {
-    if (data) {
-      const questionsWithVotes = data.map((question) =>
-        formatQuestion(question)
-      );
-      dispatch(actions.setQuestions(questionsWithVotes));
-    }
-  }, [data, dispatch]);
 
   return { status, questions };
 }

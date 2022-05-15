@@ -11,20 +11,18 @@ type FetchParams = {
 
 const initialState = {
   status: 'idle' as RequestStatus,
-  data: null,
   error: null,
 };
 
-type State<T> = {
+type State = {
   status: RequestStatus;
-  data: T | null;
   error: string | null;
 };
 
 export function useFetch<T>() {
   const abortRef = useRef<AbortController | null>(null);
   const [state, setState] = useReducer(
-    (state: State<T>, payload: Partial<State<T>>) => ({
+    (state: State, payload: Partial<State>) => ({
       ...state,
       ...payload,
     }),
@@ -32,7 +30,10 @@ export function useFetch<T>() {
   );
 
   const api = useCallback(
-    async ({ url, body, method = 'GET' }: FetchParams) => {
+    async (
+      { url, body, method = 'GET' }: FetchParams,
+      handleSuccess?: (data: T) => void
+    ) => {
       if (abortRef.current) abortRef.current.abort(); // abort previous request
       abortRef.current = new AbortController();
 
@@ -52,11 +53,12 @@ export function useFetch<T>() {
         }
 
         const jsonData = await response.json();
-        setState({ data: jsonData, status: 'success' });
+        setState({ status: 'success' });
+        handleSuccess?.(jsonData);
       } catch (error: any) {
         if (error?.name !== 'AbortError') {
           // only set error if request was not aborted
-          setState({ status: 'error' });
+          setState({ status: 'error', error: error.message });
         }
       }
     },
