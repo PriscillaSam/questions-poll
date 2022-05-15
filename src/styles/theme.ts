@@ -20,8 +20,8 @@ export const theme: DefaultTheme = {
   },
   spacing: {
     sm: '1em',
-    md: '2rem',
-    lg: '5rem',
+    md: '2em',
+    lg: '5em',
   },
   breakpoints: {
     mobile: '480px',

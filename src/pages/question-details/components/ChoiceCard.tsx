@@ -20,17 +20,20 @@ const Card = styled.li(
     padding: ${spacing.sm};
 
     @media screen and (min-width: ${breakpoints.mobile}) {
-      border-radius: ${borderRadius};
       margin-bottom: ${spacing.md};
       padding: ${spacing.md};
       flex-direction: row;
       justify-content: space-between;
     }
+
+    @media screen and (min-width: ${breakpoints.tablet}) {
+      border-radius: ${borderRadius};
+    }
   `
 );
 
 const Votes = styled.div(
-  ({ theme: { spacing, colors, breakpoints } }) => css`
+  ({ theme: { colors, breakpoints } }) => css`
     display: flex;
     margin-top: 1em;
     color: ${colors.lightGrey};
@@ -61,7 +64,6 @@ export function ChoiceCard({
       >
         {choice}
       </CustomRadioButton>
-
       <Votes>
         <span>Votes: {votes}</span>
       </Votes>

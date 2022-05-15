@@ -57,6 +57,7 @@ const Label = styled.label(
     font-weight: 500;
     font-size: 1rem;
     cursor: pointer;
+    flex-grow: 1;
 
     @media screen and (min-width: ${theme.breakpoints.mobile}) {
       font-size: 1.5rem;

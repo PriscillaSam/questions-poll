@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Heading, Container, GridContainer } from 'components';
+import { Heading, Container, GridContainer, Spinner } from 'components';
 import { useQuestions } from 'hooks';
 import { Question } from 'types';
 import QuestionCard from './Card';
@@ -16,7 +16,7 @@ export function Questions() {
       </Container>
 
       {status === 'fetching' ? (
-        <p>Loading...</p>
+        <Spinner />
       ) : (
         <QuestionsList questions={questions} />
       )}
