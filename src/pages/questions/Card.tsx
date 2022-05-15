@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Heading } from 'components';
 import { Question } from 'types';
+import { formatDate } from 'utils';
 
 interface CardProps {
   question: Question;
@@ -15,9 +16,13 @@ const CardContainer = styled.article(
   `
 );
 
-const Date = styled.p`
-  color: ${({ theme }) => theme.colors.grey};
-`;
+const Date = styled.p(
+  ({ theme }) => css`
+    color: ${theme.colors.grey};
+    font-weight: 600;
+    margin: 0.5em 0 ${theme.spacing.sm};
+  `
+);
 
 const Footer = styled.footer(
   ({ theme }) => css`
@@ -46,7 +51,7 @@ function Card(props: CardProps) {
       <Heading tag="h3" size="md" id={id}>
         {question}
       </Heading>
-      <Date>{published_at}</Date>
+      <Date>{formatDate(published_at)}</Date>
       <Footer>
         <p>Choices: {choices.length}</p>
         {votes === 0 ? null : <p>Votes: {votes}</p>}
