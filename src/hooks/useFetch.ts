@@ -1,4 +1,5 @@
 import { useCallback, useReducer, useRef } from 'react';
+import axios from 'axios';
 import { RequestStatus } from 'types';
 
 const API_Url = 'https://polls.apiblueprint.org';
@@ -38,10 +39,11 @@ export function useFetch<T>() {
       abortRef.current = new AbortController();
 
       setState({ status: 'fetching' });
+
       try {
         let options = {
-          url,
           method,
+          url: `${API_Url}/${url}`,
           signal: abortRef.current.signal,
           ...(body ? { body } : {}),
           headers: {
@@ -49,17 +51,13 @@ export function useFetch<T>() {
           },
         };
 
-        const response = await fetch(`${API_Url}/${url}`, options);
+        const response = await axios(options);
 
-        if (!response.ok) {
-          throw new Error('Oooops!!! Something went wrong, please try again.');
-        }
-
-        const jsonData = await response.json();
         setState({ status: 'success' });
-        handleSuccess?.(jsonData);
+        handleSuccess?.(response.data);
       } catch (error: any) {
-        if (error?.name !== 'AbortError') {
+        if (error?.name !== 'CanceledError') {
+          console.error(error);
           // only set error if request was not aborted
           setState({ status: 'error', error: error.message });
         }
