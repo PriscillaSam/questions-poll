@@ -81,4 +81,32 @@ describe('<QuestionDetails /> Page', () => {
       '/questions/1/choices/1'
     );
   });
+
+  it('should render success message when votingStatus is success', () => {
+    mockedHook.mockReturnValue({
+      question,
+      status: 'success',
+      vote: jest.fn(),
+      votingStatus: 'success',
+    });
+
+    render(<QuestionDetails />);
+    expect(
+      screen.getByText('Your vote has been registered')
+    ).toBeInTheDocument();
+  });
+
+  it('should render error message when votingStatus is error', () => {
+    mockedHook.mockReturnValue({
+      question,
+      status: 'success',
+      vote: jest.fn(),
+      votingStatus: 'error',
+    });
+
+    render(<QuestionDetails />);
+    expect(
+      screen.getByText('Ooops... something went wrong. Please try again')
+    ).toBeInTheDocument();
+  });
 });

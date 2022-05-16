@@ -37,6 +37,14 @@ const Flex = styled(FlexContainer)(
   `
 );
 
+const Error = styled(Text)`
+  color: #de2727;
+`;
+
+const Success = styled(Text)`
+  color: ${({ theme }) => theme.colors.lightGreen};
+`;
+
 function QuestionDetails() {
   const [selectedChoice, setSelectedChoice] = useState('');
   const { question, status, vote, votingStatus } = useQuestionDetails();
@@ -62,6 +70,12 @@ function QuestionDetails() {
           {question.question}
         </Heading>
       </Container>
+      {votingStatus === 'error' ? (
+        <Error>Ooops... something went wrong. Please try again</Error>
+      ) : null}
+      {votingStatus === 'success' ? (
+        <Success>Your vote has been registered</Success>
+      ) : null}
       <ChoiceList
         selectedChoice={selectedChoice}
         handleChange={(event) => setSelectedChoice(event.target.value)}
