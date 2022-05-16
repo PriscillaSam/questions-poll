@@ -8,7 +8,7 @@ afterAll(() => {
   jest.resetAllMocks();
 });
 
-test('s', async () => {
+test('useCreateQuestion hook', async () => {
   const { result } = renderHook(() => useCreateQuestion());
   const { question, choices, status } = result.current;
 
