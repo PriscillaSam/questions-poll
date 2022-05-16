@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Container, Heading, Spinner, Button, FlexContainer } from 'components';
+import {
+  Container,
+  Heading,
+  Spinner,
+  Button,
+  FlexContainer,
+  Text,
+  Link,
+} from 'components';
 import { useQuestionDetails } from 'hooks';
 import { ChoiceList } from './components';
 
@@ -19,10 +27,6 @@ const Flex = styled(FlexContainer)(
     padding: 0 ${spacing.sm};
     margin-bottom: ${spacing.sm};
 
-    p {
-      color: ${colors.lightGrey};
-    }
-
     @media screen and (min-width: ${breakpoints.tablet}) {
       padding: 0 ${spacing.lg};
 
@@ -39,7 +43,13 @@ function QuestionDetails() {
   const isLoading = status === 'fetching' || status === 'idle';
 
   if (isLoading) return <Spinner />;
-  if (status === 'error') return <Container>Error</Container>;
+  if (status === 'error')
+    return (
+      <Container>
+        <Text>Ooops... Something went wrong</Text>
+        <Link href="/">Go to questions</Link>
+      </Container>
+    );
   if (!question.question) return null;
 
   return (
@@ -58,7 +68,7 @@ function QuestionDetails() {
         question={question}
       />
       <Flex>
-        <p>Total votes: {question.votes}</p>
+        <Text>Total votes: {question.votes}</Text>
         <Button disabled={!selectedChoice} onClick={() => vote(selectedChoice)}>
           {votingStatus === 'fetching' ? 'Voting...' : 'Vote'}
         </Button>

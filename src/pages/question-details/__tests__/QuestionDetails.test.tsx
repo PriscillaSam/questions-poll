@@ -52,7 +52,9 @@ describe('<QuestionDetails /> Page', () => {
     });
 
     render(<QuestionDetails />);
-    expect(screen.getByText('Error')).toBeInTheDocument();
+    expect(
+      screen.getByText('Ooops... Something went wrong')
+    ).toBeInTheDocument();
   });
 
   it('should call the vote function when button is clicked', () => {

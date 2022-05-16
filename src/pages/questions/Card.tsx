@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Heading } from 'components';
+import { Heading, Text } from 'components';
 import { Question } from 'types';
 import { formatDate } from 'utils';
 
@@ -28,10 +28,6 @@ const Footer = styled.footer(
   ({ theme }) => css`
     display: flex;
     gap: ${theme.spacing.sm};
-
-    p {
-      color: ${theme.colors.white};
-    }
   `
 );
 
@@ -53,8 +49,8 @@ function Card(props: CardProps) {
       </Heading>
       <Date>{formatDate(published_at)}</Date>
       <Footer>
-        <p>Choices: {choices.length}</p>
-        {votes === 0 ? null : <p>Votes: {votes}</p>}
+        <Text>Choices: {choices.length}</Text>
+        {votes === 0 ? null : <Text>Votes: {votes}</Text>}
       </Footer>
 
       {/* eslint-disable-next-line jsx-a11y/anchor-has-content*/}

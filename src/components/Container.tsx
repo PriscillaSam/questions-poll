@@ -11,7 +11,7 @@ const StyledContainer = styled.section(
     padding: ${spacing.sm};
 
     @media (min-width: ${breakpoints.tablet}) {
-      padding: ${spacing.lg};
+      padding: ${spacing.md} ${spacing.lg};
     }
   `
 );
