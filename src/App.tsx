@@ -14,9 +14,8 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
+        <GlobalStyles />
         <Suspense fallback={<Spinner />}>
-          <GlobalStyles />
-
           <Router>
             <Routes>
               <Route path="/" element={<Questions />} />

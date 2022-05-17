@@ -16,9 +16,7 @@ export function useQuestions() {
         url: 'questions',
       },
       (questions) => {
-        const questionsWithVotes = questions.map((question) =>
-          formatQuestion(question)
-        );
+        const questionsWithVotes = questions.map(formatQuestion);
         dispatch(actions.setQuestions(questionsWithVotes));
       }
     );

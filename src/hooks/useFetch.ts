@@ -39,13 +39,12 @@ export function useFetch<T>() {
       abortRef.current = new AbortController();
 
       setState({ status: 'fetching' });
-
       try {
         let options = {
           method,
           url: `${API_Url}/${url}`,
           signal: abortRef.current.signal,
-          ...(body ? { body } : {}),
+          data: body,
           headers: {
             'Content-Type': 'application/json',
           },
