@@ -8,7 +8,7 @@ export function Spinner() {
         <circle cx="50" cy="50" r="20"></circle>
       </svg>
 
-      <Heading size="lg" tag="h1">
+      <Heading size="lg" as="h1">
         Loading...
       </Heading>
     </SpinnerContainer>

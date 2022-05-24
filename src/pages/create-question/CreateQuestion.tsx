@@ -24,7 +24,7 @@ function CreateQuestion() {
 
   return (
     <Container>
-      <Heading size="lg" tag="h1">
+      <Heading size="lg" as="h1">
         Create a new question
       </Heading>
 

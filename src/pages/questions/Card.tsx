@@ -44,7 +44,7 @@ function Card(props: CardProps) {
 
   return (
     <CardContainer>
-      <Heading tag="h3" size="md" id={id}>
+      <Heading as="h3" size="md" id={id}>
         {question}
       </Heading>
       <Date>{formatDate(published_at)}</Date>

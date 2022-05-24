@@ -63,10 +63,10 @@ function QuestionDetails() {
   return (
     <Wrapper>
       <Container>
-        <Heading size="md" tag="h3">
+        <Heading size="md" as="h3">
           Question
         </Heading>
-        <Heading size="lg" tag="h1">
+        <Heading size="lg" as="h1">
           {question.question}
         </Heading>
       </Container>

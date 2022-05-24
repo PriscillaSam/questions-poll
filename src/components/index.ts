@@ -1,4 +1,4 @@
-export { StyledHeading as Heading } from './Heading';
+export { Heading } from './Heading';
 export { Spinner } from './Spinner';
 export { Container, GridContainer, FlexContainer } from './Container';
 export { CustomRadioButton } from './CustomRadioButton';

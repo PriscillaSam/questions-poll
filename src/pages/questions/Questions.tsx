@@ -16,7 +16,7 @@ export function Questions() {
   return (
     <Fragment>
       <FlexContainer>
-        <Heading size="lg" tag="h1">
+        <Heading size="lg" as="h1">
           Questions Poll
         </Heading>
         <Link href="/questions/new">Create a new question</Link>
